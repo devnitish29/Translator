@@ -1,4 +1,6 @@
 import os
+import time
+import sys
 
 from googletrans import Translator
 
@@ -49,7 +51,7 @@ def translateIOS(filePath, destinationLanguage, fileDirectory):
         while line:
             originalText = line.strip()
             startInt = originalText.find('=')
-            endInt = originalText.find(';')
+            endInt = originalText.find('";')
             oldText = originalText[startInt:endInt]
             newText = translate(oldText, destinationLanguage)
             changedText = originalText.replace(oldText, newText)
@@ -64,6 +66,23 @@ destLanguage = input("Enter destination language code :")
 directory = input("Enter the directory path to store the translated file :")
 device = input("android or ios ?")
 
+# setup toolbar
+# toolbar_width = 40
+# sys.stdout.write("[%s]" % (" " * toolbar_width))
+# sys.stdout.flush()
+# sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+#
+# for i in xrange(toolbar_width):
+#     time.sleep(0.1) # do real work here
+#     if device.__eq__('android'):
+#         translateAndroid(originalFile, destLanguage, directory)
+#     elif device.__eq__('ios'):
+#         translateIOS(originalFile, destLanguage, directory)
+#     # update the bar
+#     sys.stdout.write("-")
+#     sys.stdout.flush()
+#
+# sys.stdout.write("\n")
 print("Relax a bit ....let me do the translation !!!")
 if device.__eq__('android'):
     translateAndroid(originalFile, destLanguage, directory)
