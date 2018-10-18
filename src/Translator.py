@@ -11,11 +11,15 @@ def translate(text, language):
         'translate.google.com',
         'translate.google.co.in',
     ])
-    translatedText = translator.translate(text, dest=language)
-    return translatedText.text
+    print(" This is the text to be printed")
+    print(text)
+    translated_text = translator.translate(text, dest=language)
+    return translated_text.text
 
 
 def translateAndroid(filepath, destinationLanguage, fileDirectory):
+    print("Relax a bit ....translateAndroid !!!")
+
     fileDirectory = fileDirectory + '/values-' + destinationLanguage
     if not os.path.exists(fileDirectory):
         os.makedirs(fileDirectory)
@@ -30,7 +34,12 @@ def translateAndroid(filepath, destinationLanguage, fileDirectory):
             startInt = originalText.find('">') + 2
             endInt = originalText.find('</')
             oldText = originalText[startInt:endInt]
+            print("Old Text ")
+            print(oldText)
+            print("newText")
+            print(translate(oldText, destinationLanguage))
             newText = translate(oldText, destinationLanguage)
+
             changedText = originalText.replace(oldText, newText)
             f.write('\n' + changedText)
             line = fp.readline()
@@ -40,6 +49,7 @@ def translateAndroid(filepath, destinationLanguage, fileDirectory):
 
 
 def translateIOS(filePath, destinationLanguage, fileDirectory):
+    print("Relax a bit ....translateIOS !!!")
     if not os.path.exists(fileDirectory):
         os.makedirs(fileDirectory)
 
@@ -61,28 +71,16 @@ def translateIOS(filePath, destinationLanguage, fileDirectory):
     f.close()
 
 
-originalFile = input("Enter the file path :")
-destLanguage = input("Enter destination language code :")
-directory = input("Enter the directory path to store the translated file :")
-device = input("android or ios ?")
+# originalFile = input("Enter the file path :")
+originalFile = "/Users/nitish/Workspace/Tarento/Android/M2M/app/src/main/res/values/strings.xml"
+# destLanguage = input("Enter destination language code :")
+destLanguage = "sv"
+# directory = input("Enter the directory path to store the translated file :")
+directory = "/Users/nitish/Workspace/Tarento/Android/"
+# device = input("android or ios ?")
+device = "android"
 
-# setup toolbar
-# toolbar_width = 40
-# sys.stdout.write("[%s]" % (" " * toolbar_width))
-# sys.stdout.flush()
-# sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
-#
-# for i in xrange(toolbar_width):
-#     time.sleep(0.1) # do real work here
-#     if device.__eq__('android'):
-#         translateAndroid(originalFile, destLanguage, directory)
-#     elif device.__eq__('ios'):
-#         translateIOS(originalFile, destLanguage, directory)
-#     # update the bar
-#     sys.stdout.write("-")
-#     sys.stdout.flush()
-#
-# sys.stdout.write("\n")
+
 print("Relax a bit ....let me do the translation !!!")
 if device.__eq__('android'):
     translateAndroid(originalFile, destLanguage, directory)
